@@ -40,7 +40,7 @@ footer: Copyright @2019 khs1994.com
 
 ### 2. 初始化 `.pcit.yml` 文件
 
-```bash
+```bash111
 $ pcitinit php
 ```
 
