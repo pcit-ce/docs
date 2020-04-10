@@ -49,7 +49,6 @@ module.exports = {
         'clone',
         'workspace',
         'steps',
-        'special-step',
         'services',
         'jobs',
         'cache',
@@ -62,6 +61,8 @@ module.exports = {
         'system_env',
         'special-command.md',
         'toolkit',
+        'security',
+        'secret',
       ],
       '/plugins/': [
 

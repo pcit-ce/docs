@@ -9,7 +9,7 @@
 ```yaml
 steps:
   php:
-    image: khs1994/php-fpm:7.4.3-alpine
+    image: khs1994/php-fpm:7.4.4-alpine
     run:
       - composer install -q
       - vendor/bin/phpunit
@@ -36,12 +36,24 @@ steps:
 ```yaml
 steps:
   php:
-    image: khs1994/php-fpm:7.4.3-alpine
+    image: khs1994/php-fpm:7.4.4-alpine
     env:
       - key=value
     run:
       - composer install -q
       - vendor/bin/phpunit
+```
+
+如果你设置的 env 依赖系统级 ENV 例如 `${HOME}` `${PATH}`，请勿在 `env` 指令中设置，请在 `run` 指令中使用 `export ...` 命令设置变量。
+
+```diff
+  env:
+    - k=v
+-   - key=${HOME}
+-   - PATH=${PATH}:/my/path
++ run:
++   - export key=${HOME}
++   - export PATH=${PATH}:/my/path
 ```
 
 ## 4. `pull`
@@ -51,7 +63,7 @@ steps:
 ```yaml
 steps:
   php:
-    image: khs1994/php-fpm:7.4.3-alpine
+    image: khs1994/php-fpm:7.4.4-alpine
     pull: true
     run:
       - composer install -q
@@ -65,11 +77,11 @@ steps:
 ```yaml
 steps:
   php:
-    image: khs1994/php-fpm:7.4.3-alpine
+    image: khs1994/php-fpm:7.4.4-alpine
     shell: bash
 ```
 
-全部支持的 `shell` 包括 `sh` `bash` `python` `pwsh` `node`
+全部支持的 `shell` 包括 `sh` `bash` `python` `pwsh` `node` `deno`
 
 ## 6. `if`
 
@@ -78,7 +90,7 @@ steps:
 ```yaml
 steps:
   php:
-    image: khs1994/php-fpm:7.4.3-alpine
+    image: khs1994/php-fpm:7.4.4-alpine
     run:
       - composer install -q
       - vendor/bin/phpunit
@@ -129,6 +141,16 @@ steps:
     provider: docker
     k: v
     k2: v2
+    k3:
+    - a
+    - b
+    - c
+    k4:
+      kk: vv
 ```
 
-将 `PCIT_K=v PCIT_K2=v2` 作为环境变量传入容器中。
+将 `INPUT_K=v INPUT_K2=v2 INPUT_K3=a,b,c INPUT_K4={"kk":"vv"}` 作为环境变量传入容器中。
+
+## 9. `read_only`
+
+与 `docker run --read-only` 参数的行为一致。

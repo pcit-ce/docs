@@ -19,7 +19,6 @@
     * [clone](usage/clone.md)
     * [workspace](usage/workspace.md)
     * [steps](usage/steps.md)
-    * [special-step](special-step.md)
     * [services](usage/services.md)
     * [jobs](usage/jobs.md)
     * [cache](usage/cache.md)
@@ -31,6 +30,8 @@
     * [system env](usage/system_env.md)
     * [special command](usage/special-command.md)
     * [toolkit](usage/toolkit.md)
+    * [security](usage/security.md)
+    * [secret](usage/secret.md)
 
 ## Example
 
